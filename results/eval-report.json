@@ -1,0 +1,1284 @@
+{
+  "rca": {
+    "reference": {
+      "policy": "reference",
+      "k": 3,
+      "scenarios": 7,
+      "pass_at_1": 1.0,
+      "pass_hat_k": 1.0,
+      "root_service_acc": 1,
+      "root_file_acc": 1,
+      "fact_recall": 0.893,
+      "forbidden_claims": 0,
+      "verified_rate": 1,
+      "mean_confidence_when_right": 4.57,
+      "mean_confidence_when_wrong": null,
+      "median_tool_calls": 17,
+      "median_seconds": 0.191,
+      "cases": [
+        {
+          "scenario": "activation-npe",
+          "trials": [
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.75,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 5,
+              "passed": true,
+              "tool_calls": 16,
+              "seconds": 0.131,
+              "evidence": 16
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.75,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 5,
+              "passed": true,
+              "tool_calls": 16,
+              "seconds": 0.191,
+              "evidence": 16
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.75,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 5,
+              "passed": true,
+              "tool_calls": 16,
+              "seconds": 0.27,
+              "evidence": 16
+            }
+          ],
+          "pass_all": true
+        },
+        {
+          "scenario": "duplicate-charge",
+          "trials": [
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 1.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 5,
+              "passed": true,
+              "tool_calls": 15,
+              "seconds": 0.112,
+              "evidence": 15
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 1.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 5,
+              "passed": true,
+              "tool_calls": 15,
+              "seconds": 0.235,
+              "evidence": 15
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 1.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 5,
+              "passed": true,
+              "tool_calls": 15,
+              "seconds": 0.237,
+              "evidence": 15
+            }
+          ],
+          "pass_all": true
+        },
+        {
+          "scenario": "gateway-misroute",
+          "trials": [
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 1.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 5,
+              "passed": true,
+              "tool_calls": 26,
+              "seconds": 0.113,
+              "evidence": 26
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 1.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 5,
+              "passed": true,
+              "tool_calls": 26,
+              "seconds": 0.195,
+              "evidence": 26
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 1.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 5,
+              "passed": true,
+              "tool_calls": 26,
+              "seconds": 0.297,
+              "evidence": 26
+            }
+          ],
+          "pass_all": true
+        },
+        {
+          "scenario": "profile-generic-error",
+          "trials": [
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 1.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 4,
+              "passed": true,
+              "tool_calls": 18,
+              "seconds": 0.122,
+              "evidence": 18
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 1.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 4,
+              "passed": true,
+              "tool_calls": 18,
+              "seconds": 0.196,
+              "evidence": 18
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 1.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 4,
+              "passed": true,
+              "tool_calls": 18,
+              "seconds": 0.245,
+              "evidence": 18
+            }
+          ],
+          "pass_all": true
+        },
+        {
+          "scenario": "promo-expired-early",
+          "trials": [
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.75,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 5,
+              "passed": true,
+              "tool_calls": 15,
+              "seconds": 0.125,
+              "evidence": 15
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.75,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 5,
+              "passed": true,
+              "tool_calls": 15,
+              "seconds": 0.152,
+              "evidence": 15
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.75,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 5,
+              "passed": true,
+              "tool_calls": 15,
+              "seconds": 0.211,
+              "evidence": 15
+            }
+          ],
+          "pass_all": true
+        },
+        {
+          "scenario": "sms-timeouts",
+          "trials": [
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.75,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 4,
+              "passed": true,
+              "tool_calls": 18,
+              "seconds": 0.13,
+              "evidence": 18
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.75,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 4,
+              "passed": true,
+              "tool_calls": 18,
+              "seconds": 0.176,
+              "evidence": 18
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.75,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 4,
+              "passed": true,
+              "tool_calls": 18,
+              "seconds": 0.304,
+              "evidence": 18
+            }
+          ],
+          "pass_all": true
+        },
+        {
+          "scenario": "upgrade-missing-login",
+          "trials": [
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 1.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 4,
+              "passed": true,
+              "tool_calls": 17,
+              "seconds": 0.101,
+              "evidence": 17
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 1.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 4,
+              "passed": true,
+              "tool_calls": 17,
+              "seconds": 0.161,
+              "evidence": 17
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 1.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 4,
+              "passed": true,
+              "tool_calls": 17,
+              "seconds": 0.258,
+              "evidence": 17
+            }
+          ],
+          "pass_all": true
+        }
+      ]
+    },
+    "no-walk-back": {
+      "policy": "no-walk-back",
+      "k": 3,
+      "scenarios": 7,
+      "pass_at_1": 0.143,
+      "pass_hat_k": 0.143,
+      "root_service_acc": 0.429,
+      "root_file_acc": 0.429,
+      "fact_recall": 0.404,
+      "forbidden_claims": 0,
+      "verified_rate": 1,
+      "mean_confidence_when_right": 4,
+      "mean_confidence_when_wrong": 1.83,
+      "median_tool_calls": 25,
+      "median_seconds": 0.043,
+      "cases": [
+        {
+          "scenario": "activation-npe",
+          "trials": [
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.5,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 4,
+              "passed": false,
+              "tool_calls": 25,
+              "seconds": 0.105,
+              "evidence": 25
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.5,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 4,
+              "passed": false,
+              "tool_calls": 25,
+              "seconds": 0.245,
+              "evidence": 25
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.5,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 4,
+              "passed": false,
+              "tool_calls": 25,
+              "seconds": 0.244,
+              "evidence": 25
+            }
+          ],
+          "pass_all": false
+        },
+        {
+          "scenario": "duplicate-charge",
+          "trials": [
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 1.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 4,
+              "passed": true,
+              "tool_calls": 32,
+              "seconds": 0.114,
+              "evidence": 32
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 1.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 4,
+              "passed": true,
+              "tool_calls": 32,
+              "seconds": 0.187,
+              "evidence": 32
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 1.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 4,
+              "passed": true,
+              "tool_calls": 32,
+              "seconds": 0.242,
+              "evidence": 32
+            }
+          ],
+          "pass_all": true
+        },
+        {
+          "scenario": "gateway-misroute",
+          "trials": [
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.33,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 1,
+              "passed": false,
+              "tool_calls": 30,
+              "seconds": 0.024,
+              "evidence": 30
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.33,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 1,
+              "passed": false,
+              "tool_calls": 30,
+              "seconds": 0.043,
+              "evidence": 30
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.33,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 1,
+              "passed": false,
+              "tool_calls": 30,
+              "seconds": 0.065,
+              "evidence": 30
+            }
+          ],
+          "pass_all": false
+        },
+        {
+          "scenario": "profile-generic-error",
+          "trials": [
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.25,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 1,
+              "passed": false,
+              "tool_calls": 7,
+              "seconds": 0.008,
+              "evidence": 7
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.25,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 1,
+              "passed": false,
+              "tool_calls": 7,
+              "seconds": 0.011,
+              "evidence": 7
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.25,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 1,
+              "passed": false,
+              "tool_calls": 7,
+              "seconds": 0.009,
+              "evidence": 7
+            }
+          ],
+          "pass_all": false
+        },
+        {
+          "scenario": "promo-expired-early",
+          "trials": [
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.25,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 1,
+              "passed": false,
+              "tool_calls": 13,
+              "seconds": 0.008,
+              "evidence": 13
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.25,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 1,
+              "passed": false,
+              "tool_calls": 13,
+              "seconds": 0.02,
+              "evidence": 13
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.25,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 1,
+              "passed": false,
+              "tool_calls": 13,
+              "seconds": 0.027,
+              "evidence": 13
+            }
+          ],
+          "pass_all": false
+        },
+        {
+          "scenario": "sms-timeouts",
+          "trials": [
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.5,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 35,
+              "seconds": 0.172,
+              "evidence": 35
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.5,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 35,
+              "seconds": 0.227,
+              "evidence": 35
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.5,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 35,
+              "seconds": 0.312,
+              "evidence": 35
+            }
+          ],
+          "pass_all": false
+        },
+        {
+          "scenario": "upgrade-missing-login",
+          "trials": [
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 1,
+              "passed": false,
+              "tool_calls": 9,
+              "seconds": 0.012,
+              "evidence": 9
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 1,
+              "passed": false,
+              "tool_calls": 9,
+              "seconds": 0.007,
+              "evidence": 9
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 1,
+              "passed": false,
+              "tool_calls": 9,
+              "seconds": 0.009,
+              "evidence": 9
+            }
+          ],
+          "pass_all": false
+        }
+      ]
+    },
+    "error-owner": {
+      "policy": "error-owner",
+      "k": 3,
+      "scenarios": 7,
+      "pass_at_1": 0.0,
+      "pass_hat_k": 0.0,
+      "root_service_acc": 0.571,
+      "root_file_acc": 0.571,
+      "fact_recall": 0.31,
+      "forbidden_claims": 0,
+      "verified_rate": 0.857,
+      "mean_confidence_when_right": null,
+      "mean_confidence_when_wrong": 2.86,
+      "median_tool_calls": 6,
+      "median_seconds": 0.01,
+      "cases": [
+        {
+          "scenario": "activation-npe",
+          "trials": [
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 7,
+              "seconds": 0.01,
+              "evidence": 7
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 7,
+              "seconds": 0.009,
+              "evidence": 7
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 7,
+              "seconds": 0.013,
+              "evidence": 7
+            }
+          ],
+          "pass_all": false
+        },
+        {
+          "scenario": "duplicate-charge",
+          "trials": [
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 7,
+              "seconds": 0.007,
+              "evidence": 7
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 7,
+              "seconds": 0.015,
+              "evidence": 7
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 7,
+              "seconds": 0.014,
+              "evidence": 7
+            }
+          ],
+          "pass_all": false
+        },
+        {
+          "scenario": "gateway-misroute",
+          "trials": [
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.67,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 6,
+              "seconds": 0.007,
+              "evidence": 6
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.67,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 6,
+              "seconds": 0.011,
+              "evidence": 6
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.67,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 6,
+              "seconds": 0.019,
+              "evidence": 6
+            }
+          ],
+          "pass_all": false
+        },
+        {
+          "scenario": "profile-generic-error",
+          "trials": [
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.5,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 6,
+              "seconds": 0.006,
+              "evidence": 6
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.5,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 6,
+              "seconds": 0.008,
+              "evidence": 6
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.5,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 6,
+              "seconds": 0.01,
+              "evidence": 6
+            }
+          ],
+          "pass_all": false
+        },
+        {
+          "scenario": "promo-expired-early",
+          "trials": [
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.25,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 6,
+              "seconds": 0.008,
+              "evidence": 6
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.25,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 6,
+              "seconds": 0.007,
+              "evidence": 6
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.25,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 6,
+              "seconds": 0.01,
+              "evidence": 6
+            }
+          ],
+          "pass_all": false
+        },
+        {
+          "scenario": "sms-timeouts",
+          "trials": [
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.5,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 6,
+              "seconds": 0.006,
+              "evidence": 6
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.5,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 6,
+              "seconds": 0.012,
+              "evidence": 6
+            },
+            {
+              "service_ok": true,
+              "file_ok": true,
+              "fact_recall": 0.5,
+              "forbidden": [],
+              "verified": true,
+              "confidence": 3,
+              "passed": false,
+              "tool_calls": 6,
+              "seconds": 0.01,
+              "evidence": 6
+            }
+          ],
+          "pass_all": false
+        },
+        {
+          "scenario": "upgrade-missing-login",
+          "trials": [
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.25,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 3,
+              "seconds": 0.006,
+              "evidence": 3
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.25,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 3,
+              "seconds": 0.006,
+              "evidence": 3
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.25,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 3,
+              "seconds": 0.015,
+              "evidence": 3
+            }
+          ],
+          "pass_all": false
+        }
+      ]
+    },
+    "loudest-error": {
+      "policy": "loudest-error",
+      "k": 3,
+      "scenarios": 7,
+      "pass_at_1": 0.0,
+      "pass_hat_k": 0.0,
+      "root_service_acc": 0,
+      "root_file_acc": 0,
+      "fact_recall": 0.0,
+      "forbidden_claims": 3,
+      "verified_rate": 0,
+      "mean_confidence_when_right": null,
+      "mean_confidence_when_wrong": 2,
+      "median_tool_calls": 5,
+      "median_seconds": 0.005,
+      "cases": [
+        {
+          "scenario": "activation-npe",
+          "trials": [
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.003,
+              "evidence": 5
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.005,
+              "evidence": 5
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.006,
+              "evidence": 5
+            }
+          ],
+          "pass_all": false
+        },
+        {
+          "scenario": "duplicate-charge",
+          "trials": [
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.003,
+              "evidence": 5
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.004,
+              "evidence": 5
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.006,
+              "evidence": 5
+            }
+          ],
+          "pass_all": false
+        },
+        {
+          "scenario": "gateway-misroute",
+          "trials": [
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.003,
+              "evidence": 5
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.005,
+              "evidence": 5
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.006,
+              "evidence": 5
+            }
+          ],
+          "pass_all": false
+        },
+        {
+          "scenario": "profile-generic-error",
+          "trials": [
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.003,
+              "evidence": 5
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.004,
+              "evidence": 5
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.007,
+              "evidence": 5
+            }
+          ],
+          "pass_all": false
+        },
+        {
+          "scenario": "promo-expired-early",
+          "trials": [
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.005,
+              "evidence": 5
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.005,
+              "evidence": 5
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.006,
+              "evidence": 5
+            }
+          ],
+          "pass_all": false
+        },
+        {
+          "scenario": "sms-timeouts",
+          "trials": [
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.004,
+              "evidence": 5
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.005,
+              "evidence": 5
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.007,
+              "evidence": 5
+            }
+          ],
+          "pass_all": false
+        },
+        {
+          "scenario": "upgrade-missing-login",
+          "trials": [
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [
+                "carrier-gateway"
+              ],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.003,
+              "evidence": 5
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [
+                "carrier-gateway"
+              ],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.005,
+              "evidence": 5
+            },
+            {
+              "service_ok": false,
+              "file_ok": false,
+              "fact_recall": 0.0,
+              "forbidden": [
+                "carrier-gateway"
+              ],
+              "verified": false,
+              "confidence": 2,
+              "passed": false,
+              "tool_calls": 5,
+              "seconds": 0.005,
+              "evidence": 5
+            }
+          ],
+          "pass_all": false
+        }
+      ]
+    }
+  },
+  "retrieval": {
+    "bm25": {
+      "recall_at_1": 0.818,
+      "recall_at_3": 0.955,
+      "mrr": 0.885
+    },
+    "dense": {
+      "recall_at_1": 0.864,
+      "recall_at_3": 1.0,
+      "mrr": 0.932
+    },
+    "hybrid": {
+      "recall_at_1": 0.818,
+      "recall_at_3": 0.955,
+      "mrr": 0.885
+    },
+    "queries": 22
+  },
+  "flows": {
+    "tickets": 24,
+    "top1": 0.833,
+    "top3": 1.0,
+    "asks_engineer": 0.208
+  },
+  "gate_failures": [],
+  "seconds": 30.4
+}

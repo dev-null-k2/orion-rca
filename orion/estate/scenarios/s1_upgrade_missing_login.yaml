@@ -1,0 +1,32 @@
+id: upgrade-missing-login
+title: Upgrade estimates rejected by billing
+ticket:
+  key: NWM-2041
+  created: "2026-08-21T17:10:00Z"
+  summary: "Phone upgrade estimates failing: BILL-4004 MANDATORY_FIELD_MISSING"
+  description: |
+    Several customers cannot finish a phone upgrade. The checkout spinner stops and support sees
+    BILL-4004 MANDATORY_FIELD_MISSING in billing. Example: account ACC-7731, order ORD-55120, around 16:32 UTC.
+    Billing team says the request had no phone number. Please find the root cause.
+window: ["2026-08-21T15:00:00Z", "2026-08-21T18:00:00Z"]
+db:
+  accounts: [{id: ACC-7731, brand: NWM, status: ACTIVE, address_line1: "12 Elm St"}]
+  lines: [{msisdn: "5550142233", account_id: ACC-7731, device_id: D-40021, status: ACTIVE, serial: null}]
+  orders: [{id: ORD-55120, account_id: ACC-7731, type: UPGRADE, status: FAILED, created: "2026-08-21T16:32:19Z"},
+           {id: ORD-55098, account_id: ACC-1200, type: UPGRADE, status: COMPLETED, created: "2026-08-21T16:30:46Z"}]
+events:
+  - {t: "2026-08-21T16:30:46.100Z", svc: web-storefront, lvl: INFO, corr: c-5098, msg: "POST /v2/carts type=UPGRADE account=ACC-1200 order=ORD-55098"}
+  - {t: "2026-08-21T16:30:47.200Z", svc: order-service, lvl: INFO, corr: c-5098, msg: "estimate built order=ORD-55098 deals=[DEVICE msisdn=5550190011, PLAN msisdn=5550190011]"}
+  - {t: "2026-08-21T16:30:47.800Z", svc: billing-core, lvl: INFO, corr: c-5098, msg: "estimate ok order=ORD-55098"}
+  - {t: "2026-08-21T16:32:19.400Z", svc: web-storefront, lvl: INFO, corr: c-5120, msg: "POST /v2/carts type=UPGRADE account=ACC-7731 order=ORD-55120"}
+  - {t: "2026-08-21T16:32:20.790Z", svc: order-service, lvl: INFO, corr: c-5120, msg: "estimate built order=ORD-55120 deals=[DEVICE msisdn=5550142233, PLAN msisdn=null]"}
+  - {t: "2026-08-21T16:32:20.798Z", svc: billing-adapter, lvl: INFO, corr: c-5120, msg: "estimate request order=ORD-55120 deals=[DEVICE msisdn=5550142233, PLAN msisdn=null]"}
+  - {t: "2026-08-21T16:32:20.821Z", svc: billing-core, lvl: ERROR, corr: c-5120, code: BILL-4004, msg: "MANDATORY_FIELD_MISSING field=msisdn order=ORD-55120 item=PLAN"}
+  - {t: "2026-08-21T16:32:20.830Z", svc: billing-adapter, lvl: ERROR, corr: c-5120, code: BILL-4004, msg: "estimate rejected order=ORD-55120 code=BILL-4004"}
+  - {t: "2026-08-21T16:32:21.000Z", svc: web-storefront, lvl: WARN, corr: c-5120, msg: "checkout failed order=ORD-55120 showing spinner timeout"}
+repeat_errors: {svc: billing-core, code: BILL-4004, msg: "MANDATORY_FIELD_MISSING field=msisdn item=PLAN", per_hour: 3}
+truth:
+  root_service: order-service
+  root_files: [order-service/src/main/java/com/northwind/order/EstimateService.java]
+  facts: ["msisdn=null", "BILL-4004", "PLAN", "setMsisdn"]
+  forbidden: ["root cause is billing-core", "carrier-gateway"]

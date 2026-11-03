@@ -1,0 +1,26 @@
+id: duplicate-charge
+title: Customers charged twice for one refill
+ticket:
+  key: NWM-2118
+  created: "2026-09-12T15:00:00Z"
+  summary: "Customers charged twice for a single refill"
+  description: |
+    Customer on account ACC-9012 was charged twice for refill order ORD-70411 yesterday afternoon.
+    Card statement shows two identical captures. More reports since the payments release.
+window: ["2026-09-11T13:00:00Z", "2026-09-11T16:00:00Z"]
+db:
+  accounts: [{id: ACC-9012, brand: NWM, status: ACTIVE, address_line1: "9 Pine Rd"}]
+  orders: [{id: ORD-70411, account_id: ACC-9012, type: REFILL, status: COMPLETED, created: "2026-09-11T14:02:00Z"}]
+  payments: [{id: P-1, order_id: ORD-70411, amount_cents: 2500, processor_ref: PX-118, status: CAPTURED, created: "2026-09-11T14:02:09Z"},
+             {id: P-2, order_id: ORD-70411, amount_cents: 2500, processor_ref: PX-121, status: CAPTURED, created: "2026-09-11T14:02:12Z"}]
+events:
+  - {t: "2026-09-11T14:02:01.000Z", svc: payment-service, lvl: INFO, corr: c-y1, msg: "capture attempt=1 order=ORD-70411 request_id=r-8f1"}
+  - {t: "2026-09-11T14:02:09.000Z", svc: payment-service, lvl: WARN, corr: c-y1, msg: "processor timeout attempt=1 order=ORD-70411 retrying"}
+  - {t: "2026-09-11T14:02:09.100Z", svc: payment-service, lvl: INFO, corr: c-y1, msg: "capture attempt=2 order=ORD-70411 request_id=r-c42"}
+  - {t: "2026-09-11T14:02:12.000Z", svc: payment-service, lvl: INFO, corr: c-y1, msg: "capture ok order=ORD-70411 processor_ref=PX-121"}
+  - {t: "2026-09-11T14:02:14.000Z", svc: payment-service, lvl: INFO, corr: c-y1, msg: "processor callback capture ok order=ORD-70411 processor_ref=PX-118"}
+truth:
+  root_service: payment-service
+  root_files: [payment-service/payment/capture.py]
+  facts: ["idempotency", "request_id", "PX-118", "PX-121", "5e2c771"]
+  forbidden: ["card issuer"]

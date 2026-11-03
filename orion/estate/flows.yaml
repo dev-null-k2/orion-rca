@@ -1,0 +1,83 @@
+# Northwind Mobile: a fictional prepaid mobile carrier used as Orion's demo estate.
+# Every service, flow and error code here is invented.
+
+services:
+  web-storefront:      {tier: frontend, repo: web-storefront,      logs: web,      desc: "Customer website and app backend-for-frontend"}
+  api-gateway:         {tier: edge,     repo: api-gateway,         logs: gateway,  desc: "Routes public API calls to internal services"}
+  order-service:       {tier: core,     repo: order-service,       logs: order,    desc: "Builds carts, estimates and orders for activation, upgrade and refill"}
+  billing-adapter:     {tier: adapter,  repo: billing-adapter,     logs: billing,  desc: "REST adapter in front of the billing core"}
+  billing-core:        {tier: system,   repo: null,                logs: billing,  desc: "Billing system of record (rating, balances, subscriptions)"}
+  activation-service:  {tier: core,     repo: activation-service,  logs: activation, desc: "Activates lines, delivers plan benefits, writes service events"}
+  subscriber-db:       {tier: system,   repo: null,                logs: db,       desc: "Subscriber database: lines, devices, service events"}
+  carrier-gateway:     {tier: adapter,  repo: carrier-gateway,     logs: carrier,  desc: "Provisions lines on the host network"}
+  profile-service:     {tier: core,     repo: profile-service,     logs: profile,  desc: "Customer profile and account updates"}
+  payment-service:     {tier: core,     repo: payment-service,     logs: payment,  desc: "Card payments, refunds, retries"}
+  catalog-service:     {tier: core,     repo: catalog-service,     logs: catalog,  desc: "Plans, prices and promotions"}
+  notification-service: {tier: core,    repo: notification-service, logs: notify,  desc: "SMS and e-mail delivery"}
+
+# caller -> callee, each line is a documented call.
+calls:
+  - [web-storefront, api-gateway]
+  - [api-gateway, order-service]
+  - [api-gateway, profile-service]
+  - [api-gateway, payment-service]
+  - [api-gateway, catalog-service]
+  - [order-service, catalog-service]
+  - [order-service, billing-adapter]
+  - [order-service, activation-service]
+  - [order-service, payment-service]
+  - [billing-adapter, billing-core]
+  - [activation-service, subscriber-db]
+  - [activation-service, carrier-gateway]
+  - [activation-service, billing-adapter]
+  - [activation-service, notification-service]
+  - [profile-service, subscriber-db]
+  - [payment-service, billing-adapter]
+  - [notification-service, carrier-gateway]
+
+flows:
+  activation:
+    name: Activation
+    words: [activate, activation, new line, sim, esn, stuck, "no number", "PENDING_ACTIVATION", benefits, pin]
+    services: [web-storefront, api-gateway, order-service, activation-service, subscriber-db, carrier-gateway, billing-adapter, billing-core, notification-service]
+    kb: [flows/activation.md]
+  upgrade:
+    name: Phone upgrade
+    words: [upgrade, new phone, device swap, estimate, trade-in]
+    services: [web-storefront, api-gateway, order-service, catalog-service, billing-adapter, billing-core]
+    kb: [flows/upgrade.md]
+  refill:
+    name: Refill
+    words: [refill, top up, top-up, airtime, recharge, pin, balance]
+    services: [web-storefront, api-gateway, order-service, payment-service, billing-adapter, billing-core, notification-service]
+    kb: [flows/refill.md]
+  payment:
+    name: Payment
+    words: [card, charged, charge, payment, declined, refund, twice, double]
+    services: [web-storefront, api-gateway, payment-service, billing-adapter, billing-core]
+    kb: [flows/payment.md]
+  profile:
+    name: My Account
+    words: [profile, personal information, address, email change, account update, my account]
+    services: [web-storefront, api-gateway, profile-service, subscriber-db]
+    kb: [flows/profile.md]
+  promotions:
+    name: Promotions
+    words: [promo, promotion, coupon, discount, offer, expired]
+    services: [web-storefront, api-gateway, catalog-service, order-service]
+    kb: [flows/promotions.md]
+  notifications:
+    name: Notifications
+    words: [sms, text message, otp, code, e-mail, email, notification, didn't get]
+    services: [activation-service, notification-service, carrier-gateway]
+    kb: [flows/notifications.md]
+
+# Where a failure "shows". Matched against the ticket before the walk starts.
+failure_points:
+  billing-core:   [billing, "BILL-", rating, subscription, balance]
+  subscriber-db:  ["DB-", "ORA", "unique constraint", "PENDING_ACTIVATION", "service event"]
+  carrier-gateway: [carrier, provisioning, "host network"]
+  payment-service: [declined, charged twice, double charge, "PAY-"]
+  notification-service: [sms, otp, "didn't get the code", text message]
+  catalog-service: [promo, price, expired]
+  web-storefront: [page, button, blank screen, spinner, "could not be saved", website]

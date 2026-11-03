@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Orion · root-cause analysis</title>
+<style>
+:root{--bg:#0b0f17;--panel:#121826;--panel2:#171f30;--line:#243049;--text:#e6ebf5;--muted:#8b97ad;--accent:#7aa2ff;
+--good:#3ecf8e;--warn:#f5b84b;--bad:#ff6b6b;--chip:#1e2a44;--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+@media (prefers-color-scheme: light){:root{--bg:#f6f7fb;--panel:#fff;--panel2:#f1f4fa;--line:#dfe4ee;--text:#121826;
+--muted:#5b6578;--chip:#e8eefc}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 -apple-system,Segoe UI,Inter,sans-serif}
+header{display:flex;align-items:center;gap:14px;padding:14px 22px;border-bottom:1px solid var(--line);background:var(--panel)}
+.logo{font-weight:800;font-size:18px;letter-spacing:.3px}.logo span{color:var(--accent)}
+.tag{color:var(--muted)}header select{margin-left:auto;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+main{display:grid;grid-template-columns:270px 1fr 440px;height:calc(100vh - 57px)}
+aside,section{overflow:auto;padding:16px;border-right:1px solid var(--line)}
+h3{margin:4px 0 12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.inc{padding:10px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;cursor:pointer;background:var(--panel)}
+.inc:hover,.inc.on{border-color:var(--accent)}.inc b{display:block;font-size:12px;color:var(--accent)}.inc small{color:var(--muted)}
+.step{margin:14px 0 6px;font-weight:700}.step small{color:var(--muted);font-weight:400}
+.tool{display:flex;gap:8px;align-items:baseline;font-family:var(--mono);font-size:12px;padding:3px 0;color:var(--muted)}
+.tool .name{color:var(--text);min-width:170px}.chip{background:var(--chip);color:var(--accent);border-radius:6px;padding:1px 6px;font-family:var(--mono);font-size:11px;cursor:pointer}
+.walk{font-family:var(--mono);font-size:12px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin:10px 0}
+.q{border-color:var(--warn)}.q button{margin:6px 6px 0 0;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer}
+.q button:hover{border-color:var(--accent)}.why{color:var(--muted);font-size:12px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}.badge{font-size:11px;border-radius:99px;padding:2px 9px;border:1px solid var(--line)}
+.ok{color:var(--good);border-color:var(--good)}.mid{color:var(--warn);border-color:var(--warn)}.no{color:var(--bad);border-color:var(--bad)}
+.dots{letter-spacing:2px;color:var(--good)}.rc{border-left:3px solid var(--accent)}code{font-family:var(--mono);font-size:12px;background:var(--panel2);padding:1px 4px;border-radius:4px;overflow-wrap:anywhere}
+ol,ul{padding-left:18px}li{margin:4px 0}.ev pre{white-space:pre-wrap;font-size:11px;font-family:var(--mono);color:var(--muted);max-height:220px;overflow:auto}
+.empty{color:var(--muted);margin-top:40px;text-align:center}
+@media(max-width:1100px){main{grid-template-columns:1fr;height:auto}aside,section{border-right:0}}
+</style>
+</head>
+<body>
+<header><div class="logo">◐ <span>Orion</span></div><div class="tag">evidence-first root-cause analysis</div>
+<select id="policy"><option value="reference">reference policy</option><option value="llm">LLM policy</option>
+<option value="no-walk-back">ablation: no walk-back</option><option value="loudest-error">baseline: loudest error</option></select></header>
+<main>
+<aside><h3>Incidents</h3><div id="incs"></div></aside>
+<section id="timeline"><h3>Investigation</h3><div class="empty">Pick an incident to start.</div></section>
+<section id="answer" style="border-right:0"><h3>Root-cause analysis</h3><div class="empty">The verified answer appears here.</div></section>
+</main>
+<script>
+const $=s=>document.querySelector(s);let sock,evidence={};
+const esc=s=>String(s??"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const fmt=s=>esc(s).replace(/`([^`]+)`/g,"<code>$1</code>");
+const chips=ids=>(ids||[]).map(i=>`<span class="chip" onclick="show('${i}')">${i}</span>`).join(" ");
+fetch("/api/scenarios").then(r=>r.json()).then(list=>{$("#incs").innerHTML=list.map(s=>`<div class="inc" data-id="${s.id}"><b>${s.key}</b>${esc(s.summary)}<br><small>${s.id}</small></div>`).join("");
+document.querySelectorAll(".inc").forEach(el=>el.onclick=()=>run(el.dataset.id,el))});
+function run(id,el){document.querySelectorAll(".inc").forEach(x=>x.classList.remove("on"));el.classList.add("on");
+const tl=$("#timeline");tl.innerHTML="<h3>Investigation</h3>";$("#answer").innerHTML='<h3>Root-cause analysis</h3><div class="empty">Working…</div>';
+if(sock)sock.close();sock=new WebSocket(`${location.protocol==="https:"?"wss":"ws"}://${location.host}/ws`);
+sock.onopen=()=>sock.send(JSON.stringify({scenario:id,policy:$("#policy").value,interactive:true}));
+sock.onmessage=m=>{const e=JSON.parse(m.data);const add=h=>tl.insertAdjacentHTML("beforeend",h);
+if(e.kind==="step")add(`<div class="step">▸ ${esc(e.name.replace("_"," "))} <small>${e.service?esc(e.service):""}</small></div>`);
+else if(e.kind==="walk")add(`<div class="step">▸ walk back <small>failure shows in ${esc(e.failure_point)}</small></div><div class="walk">${e.order.map(esc).join(" → ")}</div>`);
+else if(e.kind==="tool_end")add(`<div class="tool"><span class="name">${esc(e.tool)}</span>${e.evidence_id?chips([e.evidence_id]):""} ${esc(e.summary)}</div>`);
+else if(e.kind==="question")add(`<div class="card q" id="q"><b>Which business flow should I check?</b><div class="why">${esc(e.message)}</div>${e.options.map(o=>`<button onclick="reply('${o.id}')">${esc(o.name)}</button><div class="why">${esc(o.why.join("; "))}</div>`).join("")}<button onclick="reply(null)">Not sure — use your pick</button></div>`);
+else if(e.kind==="verified")add(`<div class="step">▸ verify <small>${e.problems.length} problem(s) · critic ${esc(e.verdict)} · confidence ${e.confidence}/5</small></div>`);
+else if(e.kind==="answer"){e.evidence.forEach(x=>evidence[x.id]=x);render(e)}
+else if(e.kind==="error")add(`<div class="card no">${esc(e.message)}</div>`);tl.scrollTop=tl.scrollHeight}}
+function reply(a){sock.send(JSON.stringify({kind:"reply",answer:a}));const q=$("#q");if(q)q.remove()}
+function show(id){const x=evidence[id];if(!x)return;$("#ev").innerHTML=`<b>${id}</b> · ${esc(x.system)} · <code>${esc(x.tool)}</code><div class="why">${esc(x.summary)}</div><pre>${esc(x.content)}</pre>`}
+function render(e){const a=e.answer,c=a.critic||{};const vb=a.verdict==="verified"?"ok":"no",cb={agree:"ok",uncertain:"mid",disagree:"no"}[c.verdict]||"mid";
+$("#answer").innerHTML=`<h3>Root-cause analysis · ${esc(a.ticket)}</h3>
+<div class="badges"><span class="badge ${vb}">${esc(a.verdict)}</span><span class="badge ${cb}">critic ${esc(c.verdict||"n/a")}</span><span class="badge">flow ${esc(a.flow)}</span><span class="badge">shows in ${esc(a.failure_point)}</span></div>
+<div><span class="dots">${"●".repeat(a.confidence)}${"○".repeat(5-a.confidence)}</span> confidence ${a.confidence}/5 · ${e.stats.tool_calls} tool calls · ${e.stats.seconds}s</div>
+<div class="card rc"><b>Root cause</b> <span class="why">${esc(a.root_cause.status)}</span><p>${fmt(a.root_cause.statement)}</p>${a.root_cause.file?`<code>${esc(a.root_cause.file)}:${a.root_cause.line}</code> `:""}${chips(a.root_cause.evidence)}</div>
+<div class="card"><b>How it fails</b><ol>${a.causal_chain.map(x=>`<li>${fmt(x.statement)} ${chips(x.evidence)}</li>`).join("")}</ol></div>
+${a.ruled_out.length?`<div class="card"><b>Ruled out</b><ul>${a.ruled_out.map(x=>`<li>${fmt(x.statement)} ${chips(x.evidence)}</li>`).join("")}</ul></div>`:""}
+${a.fix?`<div class="card"><b>Fix</b><p><code>${esc(a.fix.file)}</code> ${esc(a.fix.change)}</p></div>`:""}
+<div class="card ev" id="ev"><span class="why">Click any evidence id to see the signed record.</span></div>`}
+</script>
+</body></html>

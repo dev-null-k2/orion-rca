@@ -1,0 +1,20 @@
+id: gateway-misroute
+title: Refills fail with GW-0502 after a gateway change
+ticket:
+  key: NWM-2195
+  created: "2026-09-14T17:40:00Z"
+  summary: "Refills failing with GW-0502 since this afternoon"
+  description: |
+    Every web refill since about 3 pm UTC fails with GW-0502 UPSTREAM_UNAVAILABLE. Example account ACC-5521.
+window: ["2026-09-14T14:00:00Z", "2026-09-14T17:30:00Z"]
+db:
+  accounts: [{id: ACC-5521, brand: NWM, status: ACTIVE, address_line1: "77 Lake Dr"}]
+events:
+  - {t: "2026-09-14T15:20:05.000Z", svc: web-storefront, lvl: INFO, corr: c-g1, msg: "POST /v2/refills account=ACC-5521"}
+  - {t: "2026-09-14T15:20:05.010Z", svc: api-gateway, lvl: ERROR, corr: c-g1, code: GW-0502, msg: "UPSTREAM_UNAVAILABLE path=/v2/refills upstream=order-service-v1:8080 host not found"}
+repeat_errors: {svc: api-gateway, code: GW-0502, msg: "UPSTREAM_UNAVAILABLE path=/v2/refills upstream=order-service-v1:8080", per_hour: 120, after: "2026-09-14T15:03:00Z"}
+truth:
+  root_service: api-gateway
+  root_files: [api-gateway/routes/routes.yaml]
+  facts: ["order-service-v1", "/v2/refills", "7c1e9a2"]
+  forbidden: ["order-service is down"]

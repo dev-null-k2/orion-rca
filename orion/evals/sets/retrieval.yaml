@@ -1,0 +1,23 @@
+# Query -> the KB page that answers it. Written from the questions engineers ask, not from the page text.
+- {q: "what does BILL-4004 mean", page: error-codes.md}
+- {q: "billing says mandatory field missing on upgrade estimate", page: flows/upgrade.md}
+- {q: "device stuck in PENDING_ACTIVATION no number assigned", page: flows/activation.md}
+- {q: "how are plan benefits delivered after activation", page: flows/activation.md}
+- {q: "customer charged twice for one order", page: flows/payment.md}
+- {q: "idempotency key retries capture", page: flows/payment.md}
+- {q: "address save fails with your changes could not be saved", page: flows/profile.md}
+- {q: "generic profile error code", page: flows/profile.md}
+- {q: "promo code expired too early timezone", page: flows/promotions.md}
+- {q: "which timezone are promotions entered in", page: flows/promotions.md}
+- {q: "one time code text not received", page: flows/notifications.md}
+- {q: "carrier sms api latency p99", page: flows/notifications.md}
+- {q: "refill with a card steps", page: flows/refill.md}
+- {q: "pin refill balance update failed", page: flows/refill.md}
+- {q: "how to follow one request across services", page: runbooks/log-search.md}
+- {q: "is the carrier rate limit warning important", page: runbooks/log-search.md}
+- {q: "unique index on service events", page: runbooks/database.md}
+- {q: "which tables are in the subscriber database", page: runbooks/database.md}
+- {q: "past incident duplicate balance update", page: incidents/INC-0412.md}
+- {q: "activations stuck after carrier outage before", page: incidents/INC-0377.md}
+- {q: "GW-0502 upstream unavailable meaning", page: error-codes.md}
+- {q: "SMS_SEND_TIMEOUT code", page: error-codes.md}

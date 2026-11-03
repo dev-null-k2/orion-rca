@@ -1,0 +1,20 @@
+id: promo-expired-early
+title: Promo code rejected hours before it ends
+ticket:
+  key: NWM-2162
+  created: "2026-11-01T01:30:00Z"
+  summary: "Promo code FALL25 rejected as expired on the evening of Oct 31"
+  description: |
+    Marketing says FALL25 is valid through the end of October 31. Customers trying it at 8:30 pm Eastern on Oct 31
+    get CAT-3007 PROMO_EXPIRED. Example account ACC-2207.
+window: ["2026-10-31T23:00:00Z", "2026-11-01T01:30:00Z"]
+db:
+  promotions: [{code: FALL25, starts_at: "2026-10-01T00:00:00", ends_at: "2026-10-31T23:59:59", note: "entered in US Eastern"}]
+events:
+  - {t: "2026-11-01T00:30:12.000Z", svc: catalog-service, lvl: WARN, corr: c-c1, code: CAT-3007, msg: "promo FALL25 rejected now=2026-11-01T00:30:12Z ends_at=2026-10-31T23:59:59 account=ACC-2207"}
+  - {t: "2026-11-01T00:30:12.050Z", svc: order-service, lvl: ERROR, corr: c-c1, code: CAT-3007, msg: "pricing failed promo=FALL25 account=ACC-2207"}
+truth:
+  root_service: catalog-service
+  root_files: [catalog-service/catalog/promotions.py]
+  facts: ["FALL25", "Eastern", "UTC", "tzinfo"]
+  forbidden: ["order-service is the root cause"]

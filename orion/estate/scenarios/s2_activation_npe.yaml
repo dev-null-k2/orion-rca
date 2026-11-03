@@ -1,0 +1,30 @@
+id: activation-npe
+title: Devices stuck in PENDING_ACTIVATION after activation retries
+ticket:
+  key: NWM-2077
+  created: "2026-07-07T13:05:00Z"
+  summary: "Activation failure: devices stuck in PENDING_ACTIVATION, no number assigned"
+  description: |
+    Devices complete activation on screen but stay in status PENDING_ACTIVATION with no phone number and an unused PIN.
+    Retailers retried from the agent portal. Stack trace from the agent portal:
+    java.lang.NullPointerException
+      at com.northwind.activation.BenefitsService.deliver(BenefitsService.java:17)
+    Example device D-88120, account ACC-6402.
+window: ["2026-07-07T10:00:00Z", "2026-07-07T13:00:00Z"]
+db:
+  accounts: [{id: ACC-6402, brand: NWM, status: ACTIVE, address_line1: "4 Oak Ave"}]
+  devices: [{id: D-88120, account_id: ACC-6402, status: PENDING_ACTIVATION, msisdn: null}]
+  service_events: [{tx_id: 9001, device_id: D-88120, action: ACTIVATION, tx_date: "2026-07-07", result: PENDING, created: "2026-07-07T11:20:02Z"}]
+events:
+  - {t: "2026-07-07T11:20:01.000Z", svc: activation-service, lvl: INFO, corr: c-a1, msg: "deliver benefits device=D-88120 action=ACTIVATION attempt=1"}
+  - {t: "2026-07-07T11:20:02.000Z", svc: activation-service, lvl: WARN, corr: c-a1, msg: "pin redeem timeout device=D-88120, activation left pending"}
+  - {t: "2026-07-07T11:41:10.000Z", svc: order-service, lvl: INFO, corr: c-a2, msg: "activation order ORD-61002 device=D-88120 retry=true source=agent-portal"}
+  - {t: "2026-07-07T11:41:10.300Z", svc: activation-service, lvl: INFO, corr: c-a2, msg: "deliver benefits device=D-88120 action=ACTIVATION attempt=2"}
+  - {t: "2026-07-07T11:41:10.320Z", svc: subscriber-db, lvl: ERROR, corr: c-a2, code: DB-0001, msg: "sp_insert_service_event failed UNIQUE_CONSTRAINT ux_service_event device=D-88120 action=ACTIVATION"}
+  - {t: "2026-07-07T11:41:10.330Z", svc: activation-service, lvl: ERROR, corr: c-a2, msg: "java.lang.NullPointerException at com.northwind.activation.BenefitsService.deliver(BenefitsService.java:17) device=D-88120"}
+truth:
+  root_service: activation-service
+  root_files: [activation-service/src/main/java/com/northwind/activation/ServiceEventService.java,
+               activation-service/src/main/java/com/northwind/activation/BenefitsService.java]
+  facts: ["return null", "ux_service_event", "NullPointerException", "retry"]
+  forbidden: ["carrier-gateway outage"]

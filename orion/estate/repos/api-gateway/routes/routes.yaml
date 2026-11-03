@@ -1,0 +1,11 @@
+# Public routes -> internal upstreams
+- path: /v2/carts
+  upstream: http://order-service:8080
+- path: /v2/accounts
+  upstream: http://profile-service:8080
+- path: /v2/payments
+  upstream: http://payment-service:8080
+- path: /v2/refills
+  upstream: http://order-service-v1:8080
+- path: /v2/catalog
+  upstream: http://catalog-service:8080

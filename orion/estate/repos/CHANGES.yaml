@@ -1,0 +1,31 @@
+# Recent merged changes per repo (synthetic git history).
+- repo: api-gateway
+  sha: 7c1e9a2
+  date: "2026-09-14T15:02:00Z"
+  author: platform-team
+  title: "Move refills route to new cluster naming"
+  files: [routes/routes.yaml]
+- repo: notification-service
+  sha: b41d0c7
+  date: "2026-08-02T10:11:00Z"
+  author: messaging-team
+  title: "Lower SMS timeout to fail fast"
+  files: [notify/sms.py]
+- repo: profile-service
+  sha: 0a9f3e1
+  date: "2026-08-01T09:30:00Z"
+  author: accounts-team
+  title: "Enforce 30-character address lines"
+  files: [src/main/java/com/northwind/profile/AddressValidator.java]
+- repo: payment-service
+  sha: 5e2c771
+  date: "2026-09-10T18:45:00Z"
+  author: payments-team
+  title: "Retry captures on processor timeout"
+  files: [payment/capture.py]
+- repo: catalog-service
+  sha: 93aa04b
+  date: "2026-06-20T12:00:00Z"
+  author: catalog-team
+  title: "Store promotion windows"
+  files: [catalog/promotions.py]

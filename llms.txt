@@ -1,0 +1,8 @@
+# Orion RCA
+> Evidence-first AI agent for production root-cause analysis. Python, Apache-2.0. Runs offline with a deterministic reference policy, or with an LLM.
+
+- [README](README.md): what it does, evals, quickstart
+- [Architecture](docs/architecture.md)
+- [Harness](docs/harness.md): tool gate, ledger, verifier, critic
+- [Evals](docs/evals.md): scenarios, metrics, gate
+- [MCP](README.md#for-your-agents): `orion mcp`

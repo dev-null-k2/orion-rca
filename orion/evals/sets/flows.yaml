@@ -1,0 +1,25 @@
+# Ticket text -> business flow. Short, messy, the way tickets are actually written.
+- {t: "Customer can't activate new SIM, stuck after entering PIN", flow: activation}
+- {t: "new line never got a number, device shows PENDING_ACTIVATION", flow: activation}
+- {t: "activation retried from agent portal still failing", flow: activation}
+- {t: "upgrade checkout spinner forever, billing error on estimate", flow: upgrade}
+- {t: "trade-in upgrade to new phone fails at estimate step", flow: upgrade}
+- {t: "device swap order failed", flow: upgrade}
+- {t: "airtime refill failed with card", flow: refill}
+- {t: "top-up didn't add balance", flow: refill}
+- {t: "PIN refill rejected", flow: refill}
+- {t: "card charged twice for one order", flow: payment}
+- {t: "payment declined but bank says approved", flow: payment}
+- {t: "refund not received after cancel", flow: payment}
+- {t: "can't update address in my account", flow: profile}
+- {t: "email change not saved on profile page", flow: profile}
+- {t: "profile changes could not be saved error", flow: profile}
+- {t: "promo code says expired but should be valid", flow: promotions}
+- {t: "discount not applied at checkout, coupon rejected", flow: promotions}
+- {t: "offer ended a day early", flow: promotions}
+- {t: "didn't get the verification code text message", flow: notifications}
+- {t: "OTP sms never arrives during activation", flow: notifications}
+- {t: "no receipt e-mail after purchase", flow: notifications}
+- {t: "number not assigned after buying a new line online", flow: activation}
+- {t: "customer billed twice this month", flow: payment}
+- {t: "balance top up via website errors out", flow: refill}

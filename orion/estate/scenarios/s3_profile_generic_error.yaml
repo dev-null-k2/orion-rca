@@ -1,0 +1,23 @@
+id: profile-generic-error
+title: Profile updates fail with a generic error
+ticket:
+  key: NWM-2103
+  created: "2026-08-12T23:00:00Z"
+  summary: "Customers see 'Your changes could not be saved' on My Account"
+  description: |
+    Since early August customers saving their address on the website get
+    "Your changes could not be saved" (PRF-2001). Example account ACC-3310 at 22:18 UTC.
+window: ["2026-08-12T20:00:00Z", "2026-08-12T23:00:00Z"]
+db:
+  accounts: [{id: ACC-3310, brand: NWM, status: ACTIVE, address_line1: "1400 North Riverside Parkway Apt 12"}]
+events:
+  - {t: "2026-08-12T22:18:41.000Z", svc: web-storefront, lvl: INFO, corr: c-p1, msg: "PUT /v2/accounts/ACC-3310/profile"}
+  - {t: "2026-08-12T22:18:41.120Z", svc: profile-service, lvl: ERROR, corr: c-p1, code: PRF-2001, msg: "profile update failed account=ACC-3310"}
+  - {t: "2026-08-12T22:18:41.200Z", svc: web-storefront, lvl: WARN, corr: c-p1, msg: "showing PRF-2001 'Your changes could not be saved' account=ACC-3310"}
+repeat_errors: {svc: profile-service, code: PRF-2001, msg: "profile update failed", per_hour: 40}
+truth:
+  root_service: profile-service
+  root_files: [profile-service/src/main/java/com/northwind/profile/UpdateProfileHandler.java,
+               profile-service/src/main/java/com/northwind/profile/AddressValidator.java]
+  facts: ["PRF-2001", "catch (Exception", "30", "0a9f3e1"]
+  forbidden: ["database outage"]

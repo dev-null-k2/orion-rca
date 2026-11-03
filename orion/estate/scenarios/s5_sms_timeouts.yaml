@@ -1,0 +1,22 @@
+id: sms-timeouts
+title: One-time codes not delivered
+ticket:
+  key: NWM-2140
+  created: "2026-10-02T19:00:00Z"
+  summary: "Customers didn't get the one-time code SMS during activation"
+  description: |
+    Activations stall because customers didn't get the code text message. Support sees NTF-5004 in the
+    notification dashboard during the evening peak. Example line 5550177001.
+window: ["2026-10-02T16:00:00Z", "2026-10-02T19:00:00Z"]
+db:
+  lines: [{msisdn: "5550177001", account_id: ACC-4410, device_id: D-50110, status: PENDING, serial: "S-50110"}]
+events:
+  - {t: "2026-10-02T18:11:00.000Z", svc: notification-service, lvl: INFO, corr: c-n1, msg: "send sms to=5550177001 kind=OTP"}
+  - {t: "2026-10-02T18:11:02.010Z", svc: notification-service, lvl: ERROR, corr: c-n1, code: NTF-5004, msg: "SMS_SEND_TIMEOUT after 2.0s to=5550177001"}
+  - {t: "2026-10-02T18:11:03.900Z", svc: carrier-gateway, lvl: INFO, corr: c-n1, msg: "sms accepted to=5550177001 latency_ms=3900 (client gone)"}
+repeat_errors: {svc: notification-service, code: NTF-5004, msg: "SMS_SEND_TIMEOUT after 2.0s", per_hour: 60}
+truth:
+  root_service: notification-service
+  root_files: [notification-service/notify/sms.py]
+  facts: ["2.0", "NTF-5004", "latency_ms=3900", "b41d0c7"]
+  forbidden: ["CAR-0429 is the root cause"]
